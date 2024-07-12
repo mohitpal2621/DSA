@@ -16,7 +16,7 @@ void heapify(vector<int> &vec, int n, int node){
 
     int largest = node;
 
-    if(left < n && vec[left] > vec[node]){
+    if(left < n && vec[left] > vec[largest]){
         largest = left;
     }
 
@@ -30,7 +30,8 @@ void heapify(vector<int> &vec, int n, int node){
     }
 }
 
-void buildMaxHeap(vector<int> &vec, int n){
+void buildMaxHeap(vector<int> &vec){
+    int n = vec.size();
     for(int i = n/2 - 1; i >= 0; i--){
         heapify(vec, n, i);
     }
@@ -38,7 +39,7 @@ void buildMaxHeap(vector<int> &vec, int n){
 
 void heapSort(vector<int> &vec){
     int n = vec.size();
-    buildMaxHeap(vec, n);
+    buildMaxHeap(vec);
     for(int i = n - 1; i >= 0; i--){
         swap(vec[i], vec[0]);
         heapify(vec, i, 0);  // Important to accept the size parameter in heapify(), and passing i argument to heapify to eliminate(discard) the end node out of the heap after swapping

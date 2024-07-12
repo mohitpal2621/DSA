@@ -3,6 +3,7 @@
 using namespace std;
 
 void merge(vector<int> &arr, const int &left, const int &mid, const int &right){
+    // cout << left << " " << mid << " " << right << endl;
     int n1 = mid - left + 1;
     int n2 = right - mid;
 

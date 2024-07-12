@@ -21,6 +21,7 @@ class MaxPriorityQueue{
         int size() const;
 };
 
+// In case of insertion to the end of array, siftUp is needed to maintain the heapify property
 void MaxPriorityQueue::siftUp(int index){ 
     while(index > 0 && heap[index] > heap[(index-1) / 2]){
         swap(heap[index], heap[(index-1) / 2]);
@@ -90,10 +91,7 @@ void MaxPriorityQueue::increaseKey(int i, int key){
     
     heap[i] = key;
     
-    while(i > 0 && heap[(i - 1)/2] < heap[i]){
-        swap(heap[i], heap[(i-1)/2]);
-        i = (i-1)/2;
-    }
+    siftUp(i);
 }
 
 bool MaxPriorityQueue::isEmpty() const {

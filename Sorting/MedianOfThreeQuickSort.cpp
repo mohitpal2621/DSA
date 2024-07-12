@@ -43,7 +43,7 @@ void quickSort(vector<int> &arr, int start, int end){
 }
 
 int main() {
-    vector<int> arr = {10, 7, 8, 9, 1, 5, 12, 4, 45, 23, 1, 34};
+    vector<int> arr = {7,8,10,2,26,4,12,5,3,16,11,6,13,19};
     int n = arr.size(); 
     
     cout << "Original array: ";
