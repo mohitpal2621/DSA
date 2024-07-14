@@ -77,6 +77,47 @@ void deleteNode(Node* &head, int key){
     delete temp;
 }
 
+Node* merge(Node* left, Node* right) {
+    if(!left) return right;
+    if(!right) return left;
+
+    if(left->data <= right->data){
+        left->next = merge(left->next, right);
+        return left;
+    } else {
+        right->next = merge(left, right->next);
+        return right;
+    }
+}
+
+void split(Node* head, Node* &left, Node* &right) {
+    Node* slow = head;
+    Node* fast = slow->next;
+
+    while(fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    left = head;
+    right = slow->next;
+    slow->next = nullptr;
+}
+
+void mergeSort(Node* &head) {
+    if(!head || !head->next) return;
+
+    Node* left = nullptr;
+    Node* right = nullptr;
+
+    split(head, left, right);
+
+    mergeSort(left);
+    mergeSort(right);
+
+    head = merge(left, right);
+}
+
 Node* searchNode(Node* head, int value) {
     Node* current = head;
 
@@ -141,28 +182,11 @@ int main() {
 
     cout << endl;
 
-    swapPairs(head);
-
     print(head);
 
-    cout << endl;
-
-    reverseList(head);
+    mergeSort(head);
 
     print(head);
-
-    cout << endl;
-
-    deleteNode(head, 11);
-
-    print(head);
-
-    cout << endl;
-
-    insertAtPos(head, 4, 20);
-
-    print(head);
-
 
     return 0;
 }
